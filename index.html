@@ -6,26 +6,28 @@
 </head>
 <body>
 <div id="game-wrapper">
-
     <div id="game-bar">
         <div class="health-bar hb-left">
             <div class="hb-layer-1"></div>
-            <div id="player-health" class="hb-layer-2"></div>
+            <div id="player-one-health" class="hb-layer-2"></div>
         </div>
         <div id="timer"></div>
         <div class="health-bar hb-right">
             <div class="hb-layer-1"></div>
-            <div id="enemy-health" class="hb-layer-2"></div>
+            <div id="player-two-health" class="hb-layer-2"></div>
         </div>
     </div>
     <div id="display-text"></div>
 
     <canvas></canvas>
-
 </div>
 
 <script src="libs/gsap.js"></script>
 <script src="js/utils.js"></script>
-<script src="js/classes.js"></script>
+<script src="js/sprite.js"></script>
+<script src="js/fighter.js"></script>
+<script src="js/fighter-sprites.js"></script>
+<script src="js/background.js"></script>
+<script src="js/player-movement.js"></script>
 <script src="index.js"></script>
 </body>
