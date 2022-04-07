@@ -213,7 +213,7 @@ function animate() {
   ) {
     enemy.takeHit();
     player.isAttacking = false;
-    gsap.to('#enemyHealth', {
+    gsap.to('#enemy-health', {
       width: enemy.health + '%'
     });
   }
@@ -230,7 +230,7 @@ function animate() {
   ) {
     player.takeHit();
     enemy.isAttacking = false;
-    gsap.to('#playerHealth', {
+    gsap.to('#player-health', {
       width: player.health + '%'
     });
   }
