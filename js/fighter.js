@@ -4,7 +4,7 @@ class Fighter extends Sprite {
                 velocity = { x: 0, y: 0 },
                 offset = { x: 0, y: 0 },
                 attackBox = { offset: {}, width: undefined, height: undefined },
-                keys, healthBarElementId
+                keys, healthBarElementId, damage
               }) {
     super({
       position, scale, offset,
@@ -25,6 +25,7 @@ class Fighter extends Sprite {
     this.isDeath = false;
     this.movement = new PlayerMovement({ keys, fighter: this });
     this.healthBarElementId = healthBarElementId;
+    this.damage = damage;
   }
 
   update() {
@@ -56,7 +57,7 @@ class Fighter extends Sprite {
     const attackFrame = this.sprites.attack1.framesMax / 2;
     if ( isColliding({ rectangle1: this, rectangle2: this.enemy }) &&
         this.isAttacking && this.framesCurrent === attackFrame ) {
-      this.enemy.takeHit();
+      this.enemy.takeHit(this.damage);
       this.isAttacking = false;
     }
 
@@ -70,8 +71,8 @@ class Fighter extends Sprite {
     this.isAttacking = true;
   }
 
-  takeHit() {
-    this.health -= 20;
+  takeHit(damage) {
+    this.health -= damage;
     gsap.to(this.healthBarElementId, {
       width: this.health + '%'
     });
@@ -80,6 +81,20 @@ class Fighter extends Sprite {
       this.switchSprite('death');
     } else {
       this.switchSprite('takeHit');
+    }
+  }
+
+  move(direction) {
+    let XVelocityToAdd = direction === 'left' ? -5 : 5;
+    if (this.position.x + XVelocityToAdd > 0 && this.position.x + XVelocityToAdd < canvas.width - this.width) {
+      this.velocity.x = XVelocityToAdd;
+      this.switchSprite('run');
+    }
+  }
+
+  jump() {
+    if (this.velocity.y === 0) {
+      this.velocity.y = -20;
     }
   }
 

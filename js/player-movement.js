@@ -7,11 +7,9 @@ class PlayerMovement {
 
   update() {
     if ( this.keys.left.isPressed && this.figther.lastKey === this.keys.left.key ) {
-      this.figther.velocity.x = -5;
-      this.figther.switchSprite('run');
+      this.figther.move('left');
     } else if ( this.keys.right.isPressed && this.figther.lastKey === this.keys.right.key ) {
-      this.figther.velocity.x = 5;
-      this.figther.switchSprite('run');
+      this.figther.move('right');
     } else {
       this.figther.switchSprite('idle');
     }
@@ -25,7 +23,7 @@ class PlayerMovement {
 
   registerEventListeners() {
     window.addEventListener('keydown', (event) => {
-      if ( !this.figther.isDeath ) {
+      if ( this.figther.image !== this.figther.sprites.death.image && timer > 0 ) {
         switch ( event.key ) {
           case this.keys.right.key:
             this.keys.right.isPressed = true;
@@ -37,12 +35,16 @@ class PlayerMovement {
             break;
           case this.keys.jump.key:
             this.keys.jump.isPressed = true;
-            this.figther.velocity.y = -20;
+            this.figther.jump();
             break;
           case this.keys.attack.key:
             this.figther.attack();
             break;
         }
+      }
+
+      if (isGameOver && event.key === 'Enter') {
+        window.location.reload();
       }
     });
 

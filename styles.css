@@ -37,14 +37,18 @@
     border: 4px solid white;
 }
 
-#display-text {
+#display-text-wrapper {
     position: absolute;
-    color: white;
     display: none;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+}
+
+#display-text {
+    font-size: 24px;
 }
 
 .health-bar {
@@ -76,4 +80,10 @@
     right: 0;
     bottom: 0;
     width: 100%;
+}
+
+.text-box {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px 60px;
 }

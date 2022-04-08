@@ -6,6 +6,7 @@ canvas.height = 576;
 const groundOffset = 96;
 const gravity = 0.7;
 let timer = 60;
+let isGameOver = false;
 
 const background = new Background();
 
@@ -25,7 +26,8 @@ const playerOne = new Fighter({
     jump: { key: 'w', isPressed: false },
     attack: { key: ' ', isPressed: false }
   },
-  healthBarElementId: '#player-one-health'
+  healthBarElementId: '#player-one-health',
+  damage: 35
 });
 
 const playerTwo = new Fighter({
@@ -44,7 +46,8 @@ const playerTwo = new Fighter({
     jump: { key: 'ArrowUp', isPressed: false },
     attack: { key: 'ArrowDown', isPressed: false }
   },
-  healthBarElementId: '#player-two-health'
+  healthBarElementId: '#player-two-health',
+  damage: 20
 });
 
 playerOne.setEnemy(playerTwo);
