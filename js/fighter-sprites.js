@@ -20,7 +20,7 @@ const kenjiSprites = {
     framesMax: 4
   },
   takeHit: {
-    imageSrc: './img/kenji/Take hit.png',
+    imageSrc: './img/kenji/Take hit - white silhouette.png',
     framesMax: 3
   },
   death: {
