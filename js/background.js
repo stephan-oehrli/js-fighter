@@ -14,7 +14,7 @@ class Background {
       position: { x: 10, y: 200},
       imageSrc: './img/street light.png',
       scale: 2.2,
-      framesMax: 10,
+      framesMax: 8,
       framesHold: 25
     });
   }

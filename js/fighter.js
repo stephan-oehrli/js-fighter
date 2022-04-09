@@ -56,7 +56,8 @@ class Fighter extends Sprite {
   detectAttack() {
     const attackFrame = this.sprites.attack1.framesMax / 2;
     if ( isColliding({ rectangle1: this, rectangle2: this.enemy }) &&
-        this.isAttacking && this.framesCurrent === attackFrame ) {
+        this.isAttacking && this.framesCurrent === attackFrame &&
+        this.health > 0 && this.image === this.sprites['attack1'].image ) {
       this.enemy.takeHit(this.damage);
       this.isAttacking = false;
     }
@@ -73,9 +74,9 @@ class Fighter extends Sprite {
 
   takeHit(damage) {
     this.health -= damage;
-    gsap.to(this.healthBarElementId, {
-      width: this.health + '%'
-    });
+    const healthBarWidth = this.health > 0 ? this.health : 0;
+    gsap.to(this.healthBarElementId, { width: healthBarWidth + '%' });
+
 
     if ( this.health <= 0 ) {
       this.switchSprite('death');
@@ -86,14 +87,14 @@ class Fighter extends Sprite {
 
   move(direction) {
     let XVelocityToAdd = direction === 'left' ? -5 : 5;
-    if (this.position.x + XVelocityToAdd > 0 && this.position.x + XVelocityToAdd < canvas.width - this.width) {
+    if ( this.position.x + XVelocityToAdd > 0 && this.position.x + XVelocityToAdd < canvas.width - this.width ) {
       this.velocity.x = XVelocityToAdd;
       this.switchSprite('run');
     }
   }
 
   jump() {
-    if (this.velocity.y === 0) {
+    if ( this.velocity.y === 0 ) {
       this.velocity.y = -20;
     }
   }
@@ -104,6 +105,10 @@ class Fighter extends Sprite {
         this.isDeath = true;
       }
       return;
+    }
+
+    if (sprite === 'death') {
+      return this.handleSpriteChange(this.sprites[sprite]);
     }
 
     if ( this.isAnimationInProgress('attack1') || this.isAnimationInProgress('takeHit') ) {

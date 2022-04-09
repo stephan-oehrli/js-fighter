@@ -27,7 +27,7 @@ const playerOne = new Fighter({
     attack: { key: ' ', isPressed: false }
   },
   healthBarElementId: '#player-one-health',
-  damage: 35
+  damage: 20
 });
 
 const playerTwo = new Fighter({
@@ -47,7 +47,7 @@ const playerTwo = new Fighter({
     attack: { key: 'ArrowDown', isPressed: false }
   },
   healthBarElementId: '#player-two-health',
-  damage: 20
+  damage: 10
 });
 
 playerOne.setEnemy(playerTwo);
